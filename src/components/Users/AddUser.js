@@ -8,6 +8,7 @@ import Wrapper from "../Helpers/Wrapper";
 const AddUser = (props) => {
   const [inputUsername, setInputUsername] = useState("");
   const [inputAge, setInputAge] = useState("");
+  const [inputEmail, setInputEmail] = useState("");
   const [error, setError] = useState();
 
   const usernameChangeHandler = (event) => {
@@ -18,13 +19,26 @@ const AddUser = (props) => {
     setInputAge(event.target.value);
   };
 
+  const emailChangeHandler = (event) => {
+    setInputEmail(event.target.value);
+  };
+
+  const validateEmail = (email) => {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+  };
+
   const addUserHandler = (event) => {
     event.preventDefault();
 
-    if (inputUsername.trim().length === 0 || inputAge.trim().length === 0) {
+    if (
+      inputUsername.trim().length === 0 ||
+      inputAge.trim().length === 0 ||
+      inputEmail.trim().length === 0
+    ) {
       setError({
         title: "Invalid input",
-        message: "Please enter valid name and age (non-empty values).",
+        message: "Please make sure to enter non-empty values in all fields.",
       });
 
       return;
@@ -39,9 +53,17 @@ const AddUser = (props) => {
       return;
     }
 
-    props.onAddUser(inputUsername, inputAge);
+    if (!validateEmail(inputEmail)) {
+      setError({
+        title: "Invalid e-mail",
+        message: "Please enter correct e-mail format.",
+      });
+    }
+
+    props.onAddUser(inputUsername, inputAge, inputEmail);
     setInputUsername("");
     setInputAge("");
+    setInputEmail("");
   };
 
   const errorHandler = () => {
@@ -67,6 +89,14 @@ const AddUser = (props) => {
             type="number"
             onChange={ageChangeHandler}
             value={inputAge}
+          />
+
+          <label htmlFor="email">E-mail</label>
+          <input
+            id="email"
+            type="email"
+            onChange={emailChangeHandler}
+            value={inputEmail}
           />
 
           <Button type="submit">Add User</Button>
