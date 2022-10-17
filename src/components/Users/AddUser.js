@@ -5,6 +5,11 @@ import classes from "./AddUser.module.css";
 import ErrorModal from "../UI/ErrorModal";
 import Wrapper from "../Helpers/Wrapper";
 
+const validateEmail = (email) => {
+  var re = /\S+@\S+\.\S+/;
+  return re.test(email);
+};
+
 const AddUser = (props) => {
   const [inputUsername, setInputUsername] = useState("");
   const [inputAge, setInputAge] = useState("");
@@ -21,11 +26,6 @@ const AddUser = (props) => {
 
   const emailChangeHandler = (event) => {
     setInputEmail(event.target.value);
-  };
-
-  const validateEmail = (email) => {
-    var re = /\S+@\S+\.\S+/;
-    return re.test(email);
   };
 
   const addUserHandler = (event) => {
