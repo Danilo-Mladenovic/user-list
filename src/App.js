@@ -1,31 +1,9 @@
 import React, { useState } from "react";
-import AddUser from "./components/Users/AddUser";
-import UsersList from "./components/Users/UsersList";
-import Wrapper from "./components/Helpers/Wrapper";
+
+import Users from "./components/Users/Users";
 
 function App() {
-  const [usersList, setUsersList] = useState([]);
-
-  const addUserHandler = (username, uAge, uEmail) => {
-    setUsersList((prevUsersList) => {
-      return [
-        ...prevUsersList,
-        {
-          name: username,
-          age: uAge,
-          email: uEmail,
-          id: Math.random().toString(),
-        },
-      ];
-    });
-  };
-
-  return (
-    <Wrapper>
-      <AddUser key="" onAddUser={addUserHandler} />
-      <UsersList users={usersList} />
-    </Wrapper>
-  );
+  return <Users />;
 }
 
 export default App;
