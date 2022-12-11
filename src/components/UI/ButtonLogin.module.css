@@ -23,8 +23,8 @@ button:disabled,
 button:focus:disabled,
 button:hover:disabled,
 button:active:disabled {
-  background: #ccc;
-  border-color: #ccc;
+  background: #D2DAFF;
+  border-color: #D2DAFF;
   color: #666666;
   cursor: not-allowed;
 }
